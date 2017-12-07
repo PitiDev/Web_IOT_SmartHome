@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+	<title>My Home</title>
+  	<link href="bootstrap.min.css" rel="stylesheet">
+  	<script type="text/javascript" src="jquery.min.js"></script>
+  	<script src="bootstrap.min.js"></script>
+	<script src="bootstrap-switch.js" ></script>
+    <script src="http://netpie.io/microgear.js"></script>
+</head>
+
+
+<style type="text/css">
+body * {
+	font-family: Arial, Helvetica, sans-serif;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;	
+}
+#first_div {
+	width: 90%; 
+	max-width: 600px;
+	 min-width: 340px; 
+	 margin: 30px auto 0; 
+	 color: #444;
+}
+#second_div{
+	width: 90%; 
+	max-width: 600px; 
+	min-width: 340px; 
+	margin: 20px auto 0; 
+	background: #f3f3f3; 
+	border: 6px solid #eaeaea;
+	padding: 20px 40px 40px; 
+	text-align: center; 
+	border-radius: 20px;
+}
+#third_div{
+	width: 90%; 
+	max-width: 600px;
+	 min-width: 340px; 
+	 margin: 10px auto 0; 
+	 color: #444;
+	 text-align: center; 
+}
+</style>
+
+
+<body>
+	<div id="data" align=right><FONT COLOR=#DDDDDD>OFFLINE</FONT></div> <br>
+	<div id="first_div"><center><h1>My Home</h1></center></div>
+        
+	
+	<!-- ############################## Table of List channel control################ -->    
+    <div id="second_div">
+		<table style="width:100%">
+
+    	<!-- Header table-->
+    	<tr>
+
+        	<th><center><h2><b>Channel Control</b></h2></center></th>
+        	<th><center><h2><b>Status</b></h2></center></th>    
+    	</tr>
+     <!-- ###################### List channel 1  display ######################## --> 
+    	<tr>
+        	<td>
+        		<p><input type='checkbox' name='checkbox1' checked  /><font size="5"><b>   CH1</b></font></p>
+        	</td>
+        	<td><div id="CH1"><font size="5">Wait</font></p></div></td>
+    	</tr> 
+     <!-- ###################### List channel 2  display ######################## --> 
+    	<tr>
+        	<td>
+        		<p><input type='checkbox' name='checkbox2' checked  /><font size="5"><b>   CH2</b></font></p>
+        	</td>
+        	<td><div id="CH2"><font size="5">Wait</font></p></div></td>
+    	</tr>  
+     <!-- ###################### List channel 3  display ######################## --> 
+    	<tr>
+        	<td>
+        		<p><input type='checkbox' name='checkbox3' checked  /><font size="5"><b>   CH3</b></font></p>
+        	</td>
+        	<td><div id="CH3"><font size="5">Wait</font></p></div></td>
+    	</tr>  
+     <!-- ###################### List channel 4  display ######################## --> 
+    	<tr>
+        	<td>
+        		<p><input type='checkbox' name='checkbox4' checked  /><font size="5"><b>   CH4</b></font></p>
+        	</td>
+        	<td><div id="CH4"><font size="5">Wait</font></p></div></td>
+    	</tr>
+    	</table>
+	</div>
+
+
+
+	
+</body>
+</html>
+
+
+
+<script>
+// Remember set you events before call bootstrapSwitch or they will fire after bootstrapSwitch's events
+
+	//----------------function control SW1-----------------------------
+	$("[name='checkbox1']").change(function() {
+		if(this.checked) {
+			document.getElementById("CH1").innerHTML = "ON";
+			microgear.chat('piesonoff','A');    //send "A" charactor for on command channel1
+		}
+		else{
+			document.getElementById("CH1").innerHTML = "OFF";
+			microgear.chat('piesonoff','a');    //send "a" charactor for on command channel1		
+		}
+	});
+	//----------------function control SW2-----------------------------
+	$("[name='checkbox2']").change(function() {
+		if(this.checked) {
+			document.getElementById("CH2").innerHTML = "ON";
+			microgear.chat('piesonoff','B');    //send "B" charactor for on command channel2
+		}
+		else{
+			document.getElementById("CH2").innerHTML = "OFF";
+			microgear.chat('piesonoff','b');    //send "b" charactor for on command channel2		
+		}
+	});
+	//----------------function control SW3-----------------------------
+	$("[name='checkbox3']").change(function() {
+		if(this.checked) {
+			document.getElementById("CH3").innerHTML = "ON";
+			microgear.chat('piesonoff','C');    //send "C" charactor for on command channel3
+		}
+		else{
+			document.getElementById("CH3").innerHTML = "OFF";
+			microgear.chat('piesonoff','c');    //send "c" charactor for on command channel3		
+		}
+	});
+	//----------------function control SW4-----------------------------
+	$("[name='checkbox4']").change(function() {
+		if(this.checked) {
+			document.getElementById("CH4").innerHTML = "ON";
+			microgear.chat('piesonoff','D');    //send "D" charactor for on command channel4
+		}
+		else{
+			document.getElementById("CH4").innerHTML = "OFF";
+			microgear.chat('piesonoff','d');    //send "d" charactor for on command channel4		
+		}
+	});
+
+
+//----------------Change normal checkbox to bootstrapSwitch----------------------
+$("[name='checkbox1']").bootstrapSwitch({
+    size: 'lg'			//assign Switch size e.g. xs, sm, md, lg
+});
+$("[name='checkbox2']").bootstrapSwitch({
+    size: 'lg'
+});
+$("[name='checkbox3']").bootstrapSwitch({
+    size: 'lg'
+});
+$("[name='checkbox4']").bootstrapSwitch({
+    size: 'lg'
+});
+
+//-----------------------------MicroGear NetPie control------------------------------------
+    var    appid = "aaaaaa";							//AppID from NetPie
+    var    appkey = "bbbbbbbbbb";  		//GearKey from NetPie
+    var    appsecret = "ccccccccccccccc";  //GearSecret from NetPie            
+    
+    var microgear = Microgear.create({
+        key: appkey,
+        secret: appsecret,
+        alias : "piesonoffhtml"
+    });
+
+    microgear.on('message',function(topic,msg) {
+        if(msg =="ch1-off")document.getElementById("CH1").innerHTML = "<FONT size=5>OFF</FONT>";
+        if(msg =="ch1-on")document.getElementById("CH1").innerHTML = "<FONT size=5>ON</FONT>";        
+        if(msg =="ch2-off")document.getElementById("CH2").innerHTML = "<FONT size=5>OFF</FONT>";
+        if(msg =="ch2-on")document.getElementById("CH2").innerHTML = "<FONT size=5>ON</FONT>";
+        if(msg =="ch3-off")document.getElementById("CH3").innerHTML = "<FONT size=5>OFF</FONT>";
+        if(msg =="ch3-on")document.getElementById("CH3").innerHTML = "<FONT size=5>ON</FONT>";        
+        if(msg =="ch4-off")document.getElementById("CH4").innerHTML = "<FONT size=5>OFF</FONT>";
+        if(msg =="ch4-on")document.getElementById("CH4").innerHTML = "<FONT size=5>ON</FONT>";    
+    });
+
+    microgear.on('connected', function() {
+        microgear.subscribe('/piesonoff/state');
+        microgear.chat('piesonoff','?');
+        document.getElementById("data").innerHTML = "<FONT color=#00BB00>ONLINE</FONT>";
+    });
+    microgear.connect(appid);
+
+</script>
+
+
+
+
